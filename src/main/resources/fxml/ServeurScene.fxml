@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:id="borPane" prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/8.0.121" fx:controller="com.fstg.caissev2.controllers.ServeurScene">
+    <top>
+
+    </top>
+    <center>
+        <Pane fx:id="container"/>
+    </center>
+    <bottom>
+        <Button fx:id="buttonAffiche" onAction="#ok" prefHeight="25.0" prefWidth="601.0">
+        </Button>
+    </bottom>
+</BorderPane>
