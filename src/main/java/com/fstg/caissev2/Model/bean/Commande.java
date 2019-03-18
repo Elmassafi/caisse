@@ -24,8 +24,8 @@ public class Commande implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private double total;
-    private LocalDate dateCommande = LocalDate.now();
-    private LocalTime timeCommande = LocalTime.now();
+    private LocalDate date = LocalDate.now();
+    private LocalTime time = LocalTime.now();
     @OneToMany(mappedBy = "commande")
     private List<CommandeItem> commandeItems = new ArrayList<>();
 
@@ -44,9 +44,6 @@ public class Commande implements Serializable {
         this.total = total;
     }
 
-    public LocalDate getDateCommande() {
-        return this.dateCommande;
-    }
 
     public Long getId() {
         return id;
@@ -66,22 +63,26 @@ public class Commande implements Serializable {
         }
     }
 
-    public void setDateCommande(LocalDate dateCommande) {
-        this.dateCommande = dateCommande;
-    }
-
-    public LocalTime getTimeCommande() {
-        return timeCommande;
-    }
-
-    public void setTimeCommande(LocalTime timeCommande) {
-        this.timeCommande = timeCommande;
-    }
-
     public static List<String> getAttributesNames(){
         List<String> attributesNames= new ArrayList<>();
-        attributesNames.addAll(Arrays.asList("total", "dateCommande", "timeCommande"));
+        attributesNames.addAll(Arrays.asList("date", "time", "total"));
         return attributesNames;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalTime time) {
+        this.time = time;
     }
     @Override
     public int hashCode() {
@@ -92,7 +93,7 @@ public class Commande implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+        //  Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Commande)) {
             return false;
         }
@@ -102,12 +103,10 @@ public class Commande implements Serializable {
 
     @Override
     public String toString() {
-        return "Commande{" +
-                "id=" + id +
-                ", total=" + total +
-                ", dateCommande=" + dateCommande +
-                ", timeCommande=" + timeCommande +
-                ", commandeItems=" + commandeItems +
-                '}';
+
+        return "\n commandeItems :\n" + commandeItems +
+                "\n total : " + total +
+                "\n date : " + date +
+                " " + time;
     }
 }

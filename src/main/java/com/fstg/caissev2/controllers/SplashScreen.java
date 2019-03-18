@@ -33,7 +33,6 @@ public class SplashScreen implements Initializable {
         fadeTransition.setToValue(0);
         fadeTransition.setOnFinished(this::handle);
         fadeTransition.play();
-
     }
 
     private void handle(ActionEvent e) {

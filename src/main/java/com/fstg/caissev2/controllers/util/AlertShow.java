@@ -13,20 +13,16 @@ public class AlertShow {
     }
 
     public static void showSuccessfulAlert() {
-        //Alert  With Container FOr Upadate Product
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Okey");
-        alert.setHeaderText("Info");
-        alert.setContentText("Produit ");
+        alert.setTitle("Info");
+        alert.setHeaderText("Effectué avec succès");
         alert.show();
     }
 
     public static void showErrorAlert(){
-        //Alert  With Container FOr Upadate Product
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("ERROR");
-        alert.setHeaderText("");
-        alert.setContentText("ERROR");
+        alert.setContentText("Merci de vérifier les informations ");
         alert.show();
     }
 }

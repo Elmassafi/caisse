@@ -21,7 +21,6 @@ public class Categorie implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String reference;
     private String libelle;
 
     public Categorie() {
@@ -30,14 +29,6 @@ public class Categorie implements Serializable {
 
     public Categorie(String libelle) {
         this.libelle = libelle.toLowerCase();
-    }
-
-    public String getReference() {
-        return reference;
-    }
-
-    public void setReference(String reference) {
-        this.reference = reference;
     }
 
     public Long getId() {
@@ -65,7 +56,7 @@ public class Categorie implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+        //  Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Categorie)) {
             return false;
         }
@@ -75,6 +66,6 @@ public class Categorie implements Serializable {
 
     @Override
     public String toString() {
-        return "Categorie{'"+libelle+"'}";
+        return "{" + libelle + "}";
     }
 }

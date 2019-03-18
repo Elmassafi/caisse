@@ -11,15 +11,13 @@ import com.fstg.caissev2.controllers.util.TableViewProvider;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CommandeCreate implements Initializable {
@@ -93,16 +91,42 @@ public class CommandeCreate implements Initializable {
     public void ajouterCommandeItem(ActionEvent actionEvent) {
         try {
             Integer qteCommandee = new Integer(qte.getText());
-            commandeItemTableViewProvider.addItem(new CommandeItem(produitSelected, produitSelected.getPrix(), qteCommandee));
+            CommandeItem commandeItem = new CommandeItem(produitSelected, produitSelected.getPrix(), qteCommandee);
+            commandeItem.setTotal(produitSelected.getPrix() * qteCommandee);
+            commandeItemTableViewProvider.addItem(commandeItem);
         } catch (Exception e) {
             AlertShow.showErrorAlert();
         }
     }
 
     public void valideCommande(ActionEvent actionEvent) {
-        int i = commandeService.saveCommande(new Commande(commandeItemTableViewProvider.getList()));
-        AlertShow.whatAlertIShouldShow(i);
-        refresh();
+        Commande commande = new Commande(commandeItemTableViewProvider.getList());
+        commande.setTotal(commande.getCommandeItems().stream().mapToDouble(c -> c.getTotal()).sum());
+        showAlertCommandeBref(commande);
+    }
+
+    private void showAlertCommandeBref(Commande commande) {
+        //Alert  With Container FOr Upadate Product
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("verifiez vos information pour valider");
+        alert.setContentText("Choose votre option:");
+        TextArea textArea = new TextArea(commande.toString());
+        textArea.setEditable(false);
+        alert.getDialogPane().setContent(textArea);
+        ButtonType buttonTypeOne = new ButtonType("Valider");
+        ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == buttonTypeOne) {
+            int i = commandeService.saveCommande(commande);
+            AlertShow.whatAlertIShouldShow(i);
+            refresh();
+        } else {
+            // ... user chose CANCEL or closed the dialog
+            alert.hide();
+        }
     }
 
     public void goHome(ActionEvent actionEvent) {

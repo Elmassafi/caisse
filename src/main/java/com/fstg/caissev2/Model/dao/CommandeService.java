@@ -18,6 +18,10 @@ import java.util.List;
 public class CommandeService extends JPAUtility {
 
 
+    private static double commandeItemTotal(CommandeItem c) {
+        return c.getPrix() * c.getQte();
+    }
+
     public int saveCommande(Commande commande) {
         if (commande == null) {
             return -1;
@@ -45,37 +49,37 @@ public class CommandeService extends JPAUtility {
     private void caluleTotalCommande(Commande commande) {
         double total = 0D;
         List<CommandeItem> commandeItems = commande.getCommandeItems();
-        total = commandeItems.stream().mapToDouble(CommandeItem::getPrix).sum();
+        total = commandeItems.stream().mapToDouble(CommandeService::commandeItemTotal).sum();
         commande.setTotal(total);
     }
 
-    public List<Double> commandeRevenues(LocalDate dateMin,LocalDate dateMax){
-        String query="SELECT SUM(c.total) FROM Commande c where 1=1 ";
-        if(dateMin!=null){
-            query+=" And  c.dateCommande >='"+dateMin+"'";
+    public List<Double> commandeRevenues(LocalDate dateMin, LocalDate dateMax) {
+        String query = "SELECT SUM(c.total) FROM Commande c where 1=1 ";
+        if (dateMin != null) {
+            query += " And  c.date >='" + dateMin + "'";
         }
-        if(dateMax!=null){
-            query+=" And c.dateCommande <='"+dateMax+"'";
+        if (dateMax != null) {
+            query += " And c.date <='" + dateMax + "'";
         }
-        query+=" group by c.dateCommande";
+        query += " group by c.date";
         return getEntityManager().createQuery(query).getResultList();
     }
 
     public List<LocalDate> commandeRevenuesDate(LocalDate dateMin, LocalDate dateMax) {
-        String query = "SELECT DISTINCT c.dateCommande FROM Commande c where 1=1 ";
+        String query = "SELECT DISTINCT c.date FROM Commande c where 1=1 ";
         if (dateMin != null) {
-            query += " And  c.dateCommande >='" + dateMin + "'";
+            query += " And  c.date >='" + dateMin + "'";
         }
         if (dateMax != null) {
-            query += " And c.dateCommande <='" + dateMax + "'";
+            query += " And c.date <='" + dateMax + "'";
         }
-        query += " group by c.dateCommande";
+        query += " group by c.date";
         return getEntityManager().createQuery(query).getResultList();
     }
 
 
     public List<Double> commandeRevenuesByCategorie() {
-        String query = "SELECT SUM(c.prix) FROM CommandeItem c where 1=1 group by  c.produit.categorie";
+        String query = "SELECT SUM(c.total) FROM CommandeItem c where 1=1 group by  c.produit.categorie";
         return getEntityManager().createQuery(query).getResultList();
     }
 
@@ -84,14 +88,37 @@ public class CommandeService extends JPAUtility {
         return getEntityManager().createQuery(query).getResultList();
     }
 
+    public List<CommandeItem> findCommandeItemsByCommande(Long id) {
+        String query = "SELECT c FROM CommandeItem c WHERE c.commande.id=" + id + "";
+        return getEntityManager().createQuery(query).getResultList();
+    }
+
     public List<Commande> findByDateMinMax(LocalDate dateMin, LocalDate dateMax) {
-        String query="SELECT DISTINCT c.commande  FROM CommandeItem c where 1=1";
-        if(dateMin!=null){
-            query+=" And  c.commande.dateCommande >='"+dateMin+"'";
+        String query = "SELECT DISTINCT c.commande  FROM CommandeItem c where 1=1 ";
+        if (dateMin != null) {
+            query += " And  c.commande.date >='" + dateMin + "'";
         }
-        if(dateMax!=null){
-            query+=" And c.commande.dateCommande <='"+dateMax+"'";
+        if (dateMax != null) {
+            query += " And c.commande.date <='" + dateMax + "'";
         }
         return getMultipleResult(query);
+    }
+
+    public List<Commande> findAll() {
+        String query = "SELECT c  FROM Commande c ";
+        return getMultipleResult(query);
+    }
+
+    public void miseAjour() {
+        List<Commande> commandes = findAll();
+        commandes.forEach(c -> miseAjour(c));
+    }
+
+    private void miseAjour(Commande commande) {
+        List<CommandeItem> commandeItems = findCommandeItemsByCommande(commande.getId());
+        double total = 0D;
+        total = commandeItems.stream().mapToDouble(c -> c.getTotal()).sum();
+        commande.setTotal(total);
+        save(commande);
     }
 }

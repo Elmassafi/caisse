@@ -23,6 +23,7 @@ public class CommandeItem implements Serializable {
     private Long id;
     private double prix;
     private int qte;
+    private double total;
     @ManyToOne
     private Produit produit;
     @ManyToOne(cascade = CascadeType.REFRESH)
@@ -79,8 +80,16 @@ public class CommandeItem implements Serializable {
     }
 
     public static List<String> getAttributesNames(){
-        List<String> attributesNames = new ArrayList<>(Arrays.asList("produit", "prix", "qte", "commande"));
+        List<String> attributesNames = new ArrayList<>(Arrays.asList("produit", "prix", "qte", "total"));
         return attributesNames;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
     }
 
     @Override
@@ -92,7 +101,7 @@ public class CommandeItem implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+        // Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof CommandeItem)) {
             return false;
         }
@@ -102,12 +111,10 @@ public class CommandeItem implements Serializable {
 
     @Override
     public String toString() {
-        return "CommandeItem{" +
-                ", prix=" + prix +
-                ", qte=" + qte +
-                ", produit=" + produit +
-                ", commande=" + commande +
-                '}';
+        return "\n prix :" + prix +
+                " , qte :" + qte +
+                " , produit :" + produit +
+                "\n";
     }
 
 }

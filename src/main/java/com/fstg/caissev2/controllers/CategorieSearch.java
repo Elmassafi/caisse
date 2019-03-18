@@ -74,7 +74,7 @@ public class CategorieSearch implements Initializable {
     }
 
     private void showAlert(Produit produit) {
-    //Alert  With Container FOr Upadate Product
+        //Alert  With Container FOr Upadate Product
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");
         alert.setHeaderText("");

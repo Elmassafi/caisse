@@ -1,6 +1,7 @@
 package com.fstg.caissev2.controllers;
 
 import com.fstg.caissev2.MainApp;
+import com.fstg.caissev2.Model.dao.CommandeService;
 import com.fstg.caissev2.controllers.util.AlertShow;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -13,9 +14,10 @@ import java.util.ResourceBundle;
 
 public class AdminScreen implements Initializable {
 
+    private final CommandeService commandeService = new CommandeService();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        commandeService.miseAjour();
     }
 
     public void onMouseEntered(MouseEvent mouseEvent) {
