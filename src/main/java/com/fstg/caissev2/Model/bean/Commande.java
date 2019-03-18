@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -29,6 +30,10 @@ public class Commande implements Serializable {
     private List<CommandeItem> commandeItems = new ArrayList<>();
 
     public Commande() {
+    }
+
+    public Commande(List<CommandeItem> commandeItems) {
+        this.commandeItems = commandeItems;
     }
 
     public double getTotal() {
@@ -61,6 +66,23 @@ public class Commande implements Serializable {
         }
     }
 
+    public void setDateCommande(LocalDate dateCommande) {
+        this.dateCommande = dateCommande;
+    }
+
+    public LocalTime getTimeCommande() {
+        return timeCommande;
+    }
+
+    public void setTimeCommande(LocalTime timeCommande) {
+        this.timeCommande = timeCommande;
+    }
+
+    public static List<String> getAttributesNames(){
+        List<String> attributesNames= new ArrayList<>();
+        attributesNames.addAll(Arrays.asList("id","total","dateCommande","timeCommande"));
+        return attributesNames;
+    }
     @Override
     public int hashCode() {
         int hash = 0;

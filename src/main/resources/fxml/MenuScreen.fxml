@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            style="-fx-font-family:'Arial Narrow'"
+            fx:controller="com.fstg.caissev2.controllers.MenuScreen"
+            prefHeight="500.0" prefWidth="900.0">
+    <HBox>
+        <children>
+            <TilePane fx:id="searchPane" prefHeight="500.0" prefWidth="300.0"></TilePane>
+            <VBox  prefHeight="500.0" prefWidth="500.0">
+                <children>
+                    <FlowPane fx:id="produitPane" prefHeight="200.0" prefWidth="300.0"></FlowPane>
+                    <TilePane fx:id="statisticPane" prefHeight="200.0" prefWidth="300.0"></TilePane>
+                </children>
+            </VBox>
+        </children>
+    </HBox>
+</AnchorPane>

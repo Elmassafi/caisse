@@ -7,6 +7,9 @@ package com.fstg.caissev2.Model.bean;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Anas
@@ -18,17 +21,19 @@ public class CommandeItem implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String referenceProduit;
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    private Commande commande;
     private double prix;
     private int qte;
+    @ManyToOne
+    private Produit produit;
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    private Commande commande;
+
 
     public CommandeItem() {
     }
 
-    public CommandeItem(String referenceProduit, double prix, int qte) {
-        this.referenceProduit = referenceProduit;
+    public CommandeItem(Produit produit, double prix, int qte) {
+        this.produit = produit;
         this.prix = prix;
         this.qte = qte;
     }
@@ -41,12 +46,12 @@ public class CommandeItem implements Serializable {
         this.id = id;
     }
 
-    public String getReferenceProduit() {
-        return referenceProduit;
+    public Produit getProduit() {
+        return produit;
     }
 
-    public void setReferenceProduit(String referenceProduit) {
-        this.referenceProduit = referenceProduit;
+    public void setProduit(Produit produit) {
+        this.produit = produit;
     }
 
     public Commande getCommande() {
@@ -71,6 +76,11 @@ public class CommandeItem implements Serializable {
 
     public void setQte(int qte) {
         this.qte = qte;
+    }
+
+    public static List<String> getAttributesNames(){
+        List<String> attributesNames = new ArrayList<>(Arrays.asList("produit", "prix", "qte", "commande"));
+        return attributesNames;
     }
 
     @Override

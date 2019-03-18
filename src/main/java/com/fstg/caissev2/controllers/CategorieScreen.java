@@ -12,7 +12,7 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class FXMLController implements Initializable {
+public class CategorieScreen implements Initializable {
 
     private final CategorieService categorieService = new CategorieService();
     @FXML

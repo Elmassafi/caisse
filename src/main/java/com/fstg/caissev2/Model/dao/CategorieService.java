@@ -2,6 +2,8 @@ package com.fstg.caissev2.Model.dao;
 
 import com.fstg.caissev2.Model.bean.Categorie;
 
+import java.util.List;
+
 public class CategorieService extends JPAUtility<Categorie> {
 
 
@@ -27,6 +29,14 @@ public class CategorieService extends JPAUtility<Categorie> {
         } else {
             return null;
         }
+    }
+
+    public List<String> findAllCategoriesName(){
+        return getEntityManager().createQuery("SELECT c.libelle FROM Categorie c where 1=1").getResultList();
+    }
+
+    public List<Categorie> findAll(){
+        return getMultipleResult("SELECT c FROM Categorie c where 1=1");
     }
 
 }

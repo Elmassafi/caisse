@@ -7,6 +7,9 @@ package com.fstg.caissev2.Model.bean;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Anas
@@ -18,7 +21,6 @@ public class Produit implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String reference;
     private String libelle;
     private Double prix;
     @ManyToOne
@@ -27,14 +29,12 @@ public class Produit implements Serializable {
     public Produit() {
     }
 
-    public Produit(String reference, String libelle, Double prix) {
-        this.reference = reference;
+    public Produit(String libelle, Double prix) {
         this.libelle = libelle;
         this.prix = prix;
     }
 
-    public Produit(String reference, String libelle, Double prix, Categorie categorie) {
-        this.reference = reference;
+    public Produit(String libelle, Double prix, Categorie categorie) {
         this.libelle = libelle;
         this.prix = prix;
         this.categorie = categorie;
@@ -46,14 +46,6 @@ public class Produit implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getReference() {
-        return reference;
-    }
-
-    public void setReferenceProduit(String reference) {
-        this.reference = reference;
     }
 
     public String getLibelle() {
@@ -80,6 +72,12 @@ public class Produit implements Serializable {
         this.categorie = categorie;
     }
 
+    public static List<String> getAttributesNames(){
+        List<String> attributesNames= new ArrayList<>();
+        attributesNames.addAll(Arrays.asList("libelle","prix","categorie"));
+        return attributesNames;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -101,7 +99,6 @@ public class Produit implements Serializable {
     public String toString() {
         return "Produit{" +
                 "id=" + id +
-                ", reference='" + reference + '\'' +
                 ", libelle='" + libelle + '\'' +
                 ", prix=" + prix +
                 ", categorie=" + categorie +

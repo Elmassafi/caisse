@@ -1,6 +1,7 @@
 package com.fstg.caissev2.controllers;
 
 import com.fstg.caissev2.MainApp;
+import com.fstg.caissev2.Model.dao.JPAUtility;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,18 +24,21 @@ public class SplashScreen implements Initializable {
     @FXML
     public ProgressBar progress;
 
+    JPAUtility jpaUtility= new JPAUtility();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        jpaUtility.testConnection();
         FadeTransition fadeTransition = new FadeTransition(Duration.millis(5000), vbox);
         fadeTransition.setFromValue(1.0);
         fadeTransition.setToValue(0);
         fadeTransition.setOnFinished(this::handle);
         fadeTransition.play();
+
     }
 
     private void handle(ActionEvent e) {
         try {
-            MainApp.forward(vbox, "/fxml/Scene.fxml", getClass());
+            MainApp.forward(vbox, "/fxml/AdminScreen.fxml", getClass());
         } catch (IOException e1) {
             System.out.println("errror");
         }

@@ -7,7 +7,9 @@ package com.fstg.caissev2.Model.dao;
 
 import com.fstg.caissev2.Model.bean.Commande;
 import com.fstg.caissev2.Model.bean.CommandeItem;
+import org.eclipse.persistence.sessions.coordination.Command;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -15,19 +17,19 @@ import java.util.List;
  */
 public class CommandeService extends JPAUtility {
 
-  /*//  public CommandeService() {
-        super(Commande.class);
-    }*/
 
-    public void saveCommande(Commande commande) {
-        getEntityManager().getTransaction().begin();
-        if (commande != null) {
-            if (!commande.getCommandeItems().isEmpty()) {
-                caluleTotalCommande(commande);
-                getEntityManager().persist(commande);
-                saveCommandeItems(commande, commande.getCommandeItems());
-                getEntityManager().getTransaction().commit();
-            }
+    public int saveCommande(Commande commande) {
+        if (commande == null) {
+            return -1;
+        } else if (commande.getCommandeItems().isEmpty()) {
+            return -2;
+        } else {
+            getEntityManager().getTransaction().begin();
+            caluleTotalCommande(commande);
+            getEntityManager().persist(commande);
+            saveCommandeItems(commande, commande.getCommandeItems());
+            getEntityManager().getTransaction().commit();
+            return 1;
         }
     }
 
@@ -45,5 +47,36 @@ public class CommandeService extends JPAUtility {
         List<CommandeItem> commandeItems = commande.getCommandeItems();
         total = commandeItems.stream().mapToDouble(CommandeItem::getPrix).sum();
         commande.setTotal(total);
+    }
+
+    public List<Double> commandeRevenues(LocalDate dateMin,LocalDate dateMax){
+        String query="SELECT SUM(c.total) FROM Commande c where 1=1 ";
+        if(dateMin!=null){
+            query+=" And  c.dateCommande >='"+dateMin+"'";
+        }
+        if(dateMax!=null){
+            query+=" And c.dateCommande <='"+dateMax+"'";
+        }
+        query+=" group by c.dateCommande";
+        return getEntityManager().createQuery(query).getResultList();
+    }
+    public List<Double> commandeRevenues(String categorieName){
+        String query="SELECT SUM(c.prix) FROM CommandeItem c where 1=1";
+        if(categorieName!=null && !categorieName.isEmpty()){
+            query+=" And  c.produit.categorie.libelle ='"+categorieName.toLowerCase()+"'";
+        }
+        query+=" group by c.commande.dateCommande";
+        return getEntityManager().createQuery(query).getResultList();
+    }
+
+    public List<Commande> findByDateMinMax(LocalDate dateMin, LocalDate dateMax) {
+        String query="SELECT DISTINCT c.commande  FROM CommandeItem c where 1=1";
+        if(dateMin!=null){
+            query+=" And  c.commande.dateCommande >='"+dateMin+"'";
+        }
+        if(dateMax!=null){
+            query+=" And c.commande.dateCommande <='"+dateMax+"'";
+        }
+        return getMultipleResult(query);
     }
 }

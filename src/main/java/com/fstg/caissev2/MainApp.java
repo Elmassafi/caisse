@@ -43,7 +43,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/ServeurScene.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/SplashScreen.fxml"));
         Group group = new Group();
         HBox hBox = new HBox();
         for (int i = 0; i < 5; i++) {

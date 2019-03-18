@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+
+<TilePane alignment="CENTER" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fstg.caissev2.controllers.AdminScreen">
+       <HBox>
+           <VBox onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" onMouseClicked="#switchToServant">
+               <ImageView fx:id="servant" fitHeight="200.0" fitWidth="200.0" layoutX="-150.0">
+                   <image>
+                       <Image url="@../assets/img/servant.png" />
+                   </image>
+               </ImageView>
+           </VBox>
+           <VBox onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" onMouseClicked="#switchToMenu">
+               <ImageView fx:id="product" fitHeight="200.0" fitWidth="200.0" layoutX="-150.0">
+                   <image>
+                       <Image url="@../assets/img/menu.png" />
+                   </image>
+               </ImageView>
+           </VBox>
+           <VBox onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" onMouseClicked="#switchToStatistics">
+               <ImageView fx:id="image" fitHeight="200.0" fitWidth="200.0" layoutX="-150.0">
+                   <image>
+                       <Image url="@../assets/img/statistics.png" />
+                   </image>
+               </ImageView>
+           </VBox>
+       </HBox>
+</TilePane>

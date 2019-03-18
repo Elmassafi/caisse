@@ -36,7 +36,7 @@ public class ServeurScene implements Initializable {
 
     private void handle(ActionEvent e) {
         try {
-            setContainer("/fxml/Scene.fxml", getClass());
+            setContainer("/fxml/CategorieScreen.fxml", getClass());
         } catch (IOException e1) {
             System.out.println("errror");
         }

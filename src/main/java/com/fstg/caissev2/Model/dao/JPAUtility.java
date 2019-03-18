@@ -3,9 +3,10 @@ package com.fstg.caissev2.Model.dao;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.ArrayList;
 import java.util.List;
 
-public abstract class JPAUtility<T> {
+public class JPAUtility<T> {
 
 
     private static final String PERSISTENCE_UNIT_NAME = "com.sir_caisse_jar_1.0-SNAPSHOTPU";
@@ -18,6 +19,10 @@ public abstract class JPAUtility<T> {
             em = entityManagerFactory.createEntityManager();
         }
         return em;
+    }
+
+    public Boolean testConnection(){
+        return getEntityManager()!=null;
     }
 
     protected void save(T entity) {
@@ -39,7 +44,11 @@ public abstract class JPAUtility<T> {
     }
 
     public List<T> getMultipleResult(String query) {
-        return getEntityManager().createQuery(query).getResultList();
+        List<T> list= getEntityManager().createQuery(query).getResultList();
+        if(list==null){
+            return new ArrayList<>();
+        }
+        return list;
     }
 
 

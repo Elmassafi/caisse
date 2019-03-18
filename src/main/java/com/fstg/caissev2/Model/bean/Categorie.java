@@ -75,10 +75,6 @@ public class Categorie implements Serializable {
 
     @Override
     public String toString() {
-        return "Categorie{" +
-                "id=" + id +
-                ", reference='" + reference + '\'' +
-                ", libelle='" + libelle + '\'' +
-                '}';
+        return "Categorie{'"+libelle+"'}";
     }
 }
