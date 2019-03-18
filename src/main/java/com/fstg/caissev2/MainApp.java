@@ -3,12 +3,10 @@ package com.fstg.caissev2;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -44,18 +42,10 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/SplashScreen.fxml"));
-        Group group = new Group();
-        HBox hBox = new HBox();
-        for (int i = 0; i < 5; i++) {
-            hBox.getChildren().add(new Button("hello"));
-        }
-        Button button = new Button("go go");
-        hBox.getChildren().add(button);
-        button.setOnAction(this::handle);
-        group.getChildren().add(hBox);
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
-        stage.setTitle("Hadi Tkhwira 5/5");
+        stage.setTitle("Caisse :");
+        stage.getIcons().add(new Image("assets/img/servant.png"));
         stage.setScene(scene);
         stage.show();
     }

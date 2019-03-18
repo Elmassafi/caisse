@@ -80,7 +80,7 @@ public class Commande implements Serializable {
 
     public static List<String> getAttributesNames(){
         List<String> attributesNames= new ArrayList<>();
-        attributesNames.addAll(Arrays.asList("id","total","dateCommande","timeCommande"));
+        attributesNames.addAll(Arrays.asList("total", "dateCommande", "timeCommande"));
         return attributesNames;
     }
     @Override

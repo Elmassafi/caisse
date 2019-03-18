@@ -1,5 +1,6 @@
 package com.fstg.caissev2.controllers;
 
+import com.fstg.caissev2.Model.bean.Categorie;
 import com.fstg.caissev2.Model.dao.CommandeService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,7 +17,7 @@ public class CategorieStatistics implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
+        drowlineChart();
     }
     @FXML
     public CategoryAxis x;
@@ -29,10 +30,11 @@ public class CategorieStatistics implements Initializable {
 
     private void drowlineChart(){
         XYChart.Series series = new XYChart.Series<>();
-        List<Double> ress = commandeService.commandeRevenues(null);
+        List<Double> ress = commandeService.commandeRevenuesByCategorie();
+        List<Categorie> categories = commandeService.commandeCategorieByCategorie();
         for (int i = 0; i < ress.size(); i++) {
             Double myRes = ress.get(i);
-            series.getData().add(new XYChart.Data((i + 1) + "", myRes));
+            series.getData().add(new XYChart.Data(categories.get(i).toString(), myRes));
         }
         lineChart.getData().setAll(series);
     }

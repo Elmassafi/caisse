@@ -98,10 +98,7 @@ public class Produit implements Serializable {
     @Override
     public String toString() {
         return "Produit{" +
-                "id=" + id +
                 ", libelle='" + libelle + '\'' +
-                ", prix=" + prix +
-                ", categorie=" + categorie +
                 '}';
     }
 }

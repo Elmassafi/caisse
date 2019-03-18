@@ -4,26 +4,21 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-
-<HBox prefHeight="400.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fstg.caissev2.controllers.StatisticsScreen">
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<HBox xmlns:fx="http://javafx.com/fxml/1" prefHeight="452.0" prefWidth="934.0" xmlns="http://javafx.com/javafx/8.0.121"
+      fx:controller="com.fstg.caissev2.controllers.StatisticsScreen">
     <children>
-
         <VBox>
             <GridPane hgap="10" vgap="10">
-                <Label GridPane.columnIndex="1" GridPane.rowIndex="0">DateMin</Label>
-                <DatePicker fx:id="dateMin" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <Label GridPane.columnIndex="3" GridPane.rowIndex="0">DateMax</Label>
-                <DatePicker fx:id="dateMax" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                <Button prefHeight="25.0" prefWidth="175.0" GridPane.columnIndex="3" GridPane.rowIndex="2" onAction="#commandsByDate">Search</Button>
+                <Label GridPane.columnIndex="1" GridPane.rowIndex="0">Commande</Label>
+                <Label GridPane.columnIndex="1" GridPane.rowIndex="1">DateMin</Label>
+                <DatePicker fx:id="dateMin" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                <Label GridPane.columnIndex="3" GridPane.rowIndex="1">DateMax</Label>
+                <DatePicker fx:id="dateMax" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+                <Button onAction="#commandsByDate" prefHeight="25.0" prefWidth="175.0" text="Search"
+                        GridPane.columnIndex="3" GridPane.rowIndex="3">Search
+                </Button>
             <columnConstraints>
                <ColumnConstraints />
                <ColumnConstraints />
@@ -46,12 +41,15 @@
              </padding>
         </VBox>
         <VBox>
+            <TilePane alignment="CENTER">
+                <Label>Graph</Label>
+            </TilePane>
          <LineChart fx:id="lineChart" prefHeight="300.0" prefWidth="450.0">
            <xAxis>
-             <CategoryAxis fx:id="x" side="BOTTOM" />
+               <CategoryAxis side="BOTTOM" fx:id="x"/>
            </xAxis>
            <yAxis>
-             <NumberAxis  fx:id="y" side="LEFT" />
+               <NumberAxis fx:id="y" side="LEFT"/>
            </yAxis>
              <padding>
                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -62,7 +60,9 @@
                 <DatePicker fx:id="dateMinGraph" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <Label prefHeight="17.0" prefWidth="139.0" GridPane.columnIndex="3">DateMax</Label>
                 <DatePicker fx:id="dateMaxGraph" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                <Button prefHeight="25.0" prefWidth="175.0" GridPane.columnIndex="4" GridPane.rowIndex="1" onAction="#drowLineChart">Search</Button>
+                <Button onAction="#drowLineChart" prefHeight="25.0" prefWidth="175.0" text="Search"
+                        GridPane.columnIndex="4" GridPane.rowIndex="1">Search
+                </Button>
                 <columnConstraints>
                     <ColumnConstraints />
                     <ColumnConstraints />
@@ -76,6 +76,9 @@
                     <RowConstraints />
                 </rowConstraints>
             </GridPane>
+            <HBox alignment="TOP_RIGHT">
+                <Button onAction="#goHome">Home</Button>
+            </HBox>
             <padding>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </padding>

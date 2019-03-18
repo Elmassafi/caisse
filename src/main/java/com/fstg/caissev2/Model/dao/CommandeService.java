@@ -5,9 +5,9 @@
  */
 package com.fstg.caissev2.Model.dao;
 
+import com.fstg.caissev2.Model.bean.Categorie;
 import com.fstg.caissev2.Model.bean.Commande;
 import com.fstg.caissev2.Model.bean.CommandeItem;
-import org.eclipse.persistence.sessions.coordination.Command;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -60,12 +60,27 @@ public class CommandeService extends JPAUtility {
         query+=" group by c.dateCommande";
         return getEntityManager().createQuery(query).getResultList();
     }
-    public List<Double> commandeRevenues(String categorieName){
-        String query="SELECT SUM(c.prix) FROM CommandeItem c where 1=1";
-        if(categorieName!=null && !categorieName.isEmpty()){
-            query+=" And  c.produit.categorie.libelle ='"+categorieName.toLowerCase()+"'";
+
+    public List<LocalDate> commandeRevenuesDate(LocalDate dateMin, LocalDate dateMax) {
+        String query = "SELECT DISTINCT c.dateCommande FROM Commande c where 1=1 ";
+        if (dateMin != null) {
+            query += " And  c.dateCommande >='" + dateMin + "'";
         }
-        query+=" group by c.commande.dateCommande";
+        if (dateMax != null) {
+            query += " And c.dateCommande <='" + dateMax + "'";
+        }
+        query += " group by c.dateCommande";
+        return getEntityManager().createQuery(query).getResultList();
+    }
+
+
+    public List<Double> commandeRevenuesByCategorie() {
+        String query = "SELECT SUM(c.prix) FROM CommandeItem c where 1=1 group by  c.produit.categorie";
+        return getEntityManager().createQuery(query).getResultList();
+    }
+
+    public List<Categorie> commandeCategorieByCategorie() {
+        String query = "SELECT DISTINCT c.produit.categorie FROM CommandeItem c where 1=1 group by  c.produit.categorie";
         return getEntityManager().createQuery(query).getResultList();
     }
 

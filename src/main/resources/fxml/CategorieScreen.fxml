@@ -5,13 +5,15 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.*?>
 <TilePane xmlns:fx="http://javafx.com/fxml/1" prefHeight="166.0" prefWidth="261.0"
-            xmlns="http://javafx.com/javafx/8.0.121" alignment="center"  fx:controller="com.fstg.caissev2.controllers.CategorieScreen">
+          xmlns="http://javafx.com/javafx/8.0.121" alignment="center"
+          fx:controller="com.fstg.caissev2.controllers.CategorieScreen">
     <children>
         <GridPane alignment="center" hgap="10" style="-fx-font-family:'Arial Narrow'" vgap="10">
-            <Label GridPane.columnIndex="0" GridPane.rowIndex="0">Categorie:</Label>
-            <TextField fx:id="cateName" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <Label GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2">Ajouter Categorie:</Label>
+            <Label GridPane.columnIndex="0" GridPane.rowIndex="1">Categorie:</Label>
+            <TextField fx:id="cateName" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
             <Button onAction="#createCategorie" prefHeight="23.0" prefWidth="125.0" GridPane.columnIndex="1"
-                    GridPane.rowIndex="1">Ajouter Categorie
+                    GridPane.rowIndex="2">Ajouter Categorie
             </Button>
             <columnConstraints>
                 <ColumnConstraints/>

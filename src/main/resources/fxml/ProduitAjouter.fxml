@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-
-<?import javafx.scene.layout.TilePane?>
-<TilePane alignment="CENTER" prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fstg.caissev2.controllers.ProduitAjouter">
-    <children>
-        <GridPane hgap="10" vgap="10">
-            <Label GridPane.columnIndex="0" GridPane.rowIndex="0">Categorie:</Label><ComboBox fx:id="cateBox" prefHeight="25.0" prefWidth="148.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-            <Label GridPane.columnIndex="0" GridPane.rowIndex="1">Libelle:</Label><TextField fx:id="libelle" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label GridPane.columnIndex="0" GridPane.rowIndex="2">prix:</Label><TextField fx:id="prix" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button onAction="#addProduit" prefHeight="25.0" prefWidth="149.0" text="Ajoute" GridPane.columnIndex="1" GridPane.rowIndex="3">Ajoute</Button>
-         <columnConstraints>
-            <ColumnConstraints />
-            <ColumnConstraints />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-         </rowConstraints>
-        </GridPane>
-    </children>
-</TilePane>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<GridPane xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" hgap="10" prefHeight="145.0" prefWidth="223.0"
+          vgap="10" xmlns="http://javafx.com/javafx/8.0.121"
+          fx:controller="com.fstg.caissev2.controllers.ProduitAjouter">
+    <columnConstraints>
+        <ColumnConstraints/>
+        <ColumnConstraints/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+    </rowConstraints>
+    <Label alignment="CENTER" prefHeight="17.0" prefWidth="47.0" GridPane.columnIndex="0" GridPane.columnSpan="2"
+           GridPane.rowIndex="0">Produit :
+    </Label>
+    <Label prefHeight="17.0" prefWidth="70.0" GridPane.columnIndex="0" GridPane.rowIndex="1">Categorie:</Label>
+    <ComboBox fx:id="cateBox" prefHeight="25.0" prefWidth="148.0" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    <Label GridPane.columnIndex="0" GridPane.rowIndex="2">Libelle:</Label>
+    <TextField fx:id="libelle" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+    <Label GridPane.columnIndex="0" GridPane.rowIndex="3">prix:</Label>
+    <TextField fx:id="prix" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+    <Button onAction="#addProduit" prefHeight="25.0" prefWidth="149.0" text="Ajoute" GridPane.columnIndex="1"
+            GridPane.rowIndex="4">Ajoute
+    </Button>
+</GridPane>

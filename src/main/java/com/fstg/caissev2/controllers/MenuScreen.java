@@ -1,17 +1,15 @@
 package com.fstg.caissev2.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -31,6 +29,10 @@ public class MenuScreen implements Initializable {
         addSearchPaneChild(produitPane,"/fxml/CategorieScreen.fxml",getClass());
         setSearchPaneChild(statisticPane,"/fxml/CategorieStatistics.fxml",getClass());
 
+    }
+
+    public void goHome(ActionEvent actionEvent) {
+        AdminScreen.goHome(actionEvent, getClass());
     }
 
     public void setSearchPaneChild(Pane pane, String pageName, Class myClass){

@@ -1,13 +1,13 @@
 package com.fstg.caissev2.controllers;
 
 import com.fstg.caissev2.MainApp;
+import com.fstg.caissev2.controllers.util.AlertShow;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
-
-
-import javafx.scene.Node;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -37,13 +37,12 @@ public class AdminScreen implements Initializable {
         }
     }
 
-    public void switchToMenu(MouseEvent mouseEvent) {
-        try{
-            MainApp.forward((Node) mouseEvent.getSource(), "/fxml/MenuScreen.fxml",getClass());
-        }catch (Exception e){
-            System.out.println();
+    public static void goHome(ActionEvent actionEvent, Class myClass) {
+        try {
+            MainApp.forward(actionEvent, "/fxml/AdminScreen.fxml", myClass);
+        } catch (Exception e) {
+            AlertShow.showErrorAlert();
         }
-
     }
 
     public void switchToServant(MouseEvent mouseEvent) {
@@ -58,6 +57,14 @@ public class AdminScreen implements Initializable {
             MainApp.forward((Node) mouseEvent.getSource(),"/fxml/StatisticsScreen.fxml",getClass());
         }catch (Exception e){
             System.out.println();
+        }
+    }
+
+    public void switchToMenu(MouseEvent mouseEvent) {
+        try {
+            MainApp.forward((Node) mouseEvent.getSource(), "/fxml/MenuScreen.fxml", getClass());
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 

@@ -12,9 +12,9 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
-import org.eclipse.persistence.sessions.coordination.Command;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -52,10 +52,12 @@ public class StatisticsScreen implements Initializable {
         System.out.println("max is"+dateMaxGraph.getValue());
         System.out.println("Min is "+dateMinGraph.getValue());
         List<Double> ress = commandeService.commandeRevenues(dateMinGraph.getValue(), dateMaxGraph.getValue());
+        List<LocalDate> dates = commandeService.commandeRevenuesDate(dateMinGraph.getValue(), dateMaxGraph.getValue());
+        System.out.println(dates);
         System.out.println(ress);
         for (int i = 0; i < ress.size(); i++) {
             Double myRes = ress.get(i);
-            series.getData().add(new XYChart.Data((i + 1) + "", myRes));
+            series.getData().add(new XYChart.Data(dates.get(i).toString(), myRes));
         }
         lineChart.getData().setAll(series);
     }
@@ -63,5 +65,9 @@ public class StatisticsScreen implements Initializable {
     public void commandsByDate(ActionEvent actionEvent) {
         List<Commande> commands= commandeService.findByDateMinMax(dateMin.getValue(), dateMax.getValue());
         commandeTableViewProvider.setList(commands);
+    }
+
+    public void goHome(ActionEvent actionEvent) {
+        AdminScreen.goHome(actionEvent, getClass());
     }
 }

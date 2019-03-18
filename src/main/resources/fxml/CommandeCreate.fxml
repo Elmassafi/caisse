@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.TilePane?>
-<?import javafx.scene.layout.VBox?>
-
-       <VBox prefHeight="497.0" prefWidth="357.0" style="-fx-font-family:'Arial Narrow'" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fstg.caissev2.controllers.CommandeCreate">
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" prefHeight="497.0" prefWidth="357.0" style="-fx-font-family:'Arial Narrow'"
+      xmlns="http://javafx.com/javafx/8.0.121" fx:controller="com.fstg.caissev2.controllers.CommandeCreate">
            <GridPane hgap="10" vgap="10">
                <children>
                    <Label GridPane.columnIndex="0" GridPane.rowIndex="0">Categorie:</Label>
@@ -56,6 +48,7 @@
            <TilePane alignment="CENTER">
                <children>
                    <Button fx:id="saveCommande" onAction="#valideCommande" prefHeight="25.0" prefWidth="112.0" GridPane.columnIndex="2" GridPane.rowIndex="0">Valide Commande</Button>
+                   <Button onAction="#goHome">Home</Button>
                </children>
            </TilePane>
        </VBox>

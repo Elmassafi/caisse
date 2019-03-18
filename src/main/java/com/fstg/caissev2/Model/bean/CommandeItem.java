@@ -102,7 +102,12 @@ public class CommandeItem implements Serializable {
 
     @Override
     public String toString() {
-        return "com.elanas.commandeapi.bean.CommandeItem[ id=" + id + " ]";
+        return "CommandeItem{" +
+                ", prix=" + prix +
+                ", qte=" + qte +
+                ", produit=" + produit +
+                ", commande=" + commande +
+                '}';
     }
 
 }

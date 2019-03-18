@@ -11,7 +11,10 @@ import com.fstg.caissev2.controllers.util.TableViewProvider;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
@@ -65,6 +68,12 @@ public class CommandeCreate implements Initializable {
         commandeItemTableViewProvider= new TableViewProvider<CommandeItem>(commandeItemTableView,CommandeItem.getAttributesNames());
     }
 
+    private void refresh() {
+        produitTableViewProvider.setList(new ArrayList<>());
+        commandeItemTableViewProvider.setList(new ArrayList<>());
+        prix.setText("");
+    }
+
     public void searchProduct(ActionEvent actionEvent) {
         String value = (String) categorieComboBox.getValue();
         if (!value.equals("SELECT")) {
@@ -92,7 +101,11 @@ public class CommandeCreate implements Initializable {
 
     public void valideCommande(ActionEvent actionEvent) {
         int i = commandeService.saveCommande(new Commande(commandeItemTableViewProvider.getList()));
-         AlertShow.whatAlertIShouldShow(i);
+        AlertShow.whatAlertIShouldShow(i);
+        refresh();
     }
 
+    public void goHome(ActionEvent actionEvent) {
+        AdminScreen.goHome(actionEvent, getClass());
+    }
 }
