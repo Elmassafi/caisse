@@ -7,7 +7,6 @@ import com.fstg.caissev2.controllers.util.AlertShow;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
@@ -57,6 +56,9 @@ public class ProduitAjouter implements Initializable {
                     AlertShow.showErrorAlert();
                 }else{
                     AlertShow.showSuccessfulAlert();
+                    libelle.setText(" ");
+                    prix.setText(" ");
+                    cateBox.setValue("SELECT");
                 }
             }
         }
@@ -65,7 +67,6 @@ public class ProduitAjouter implements Initializable {
     private Produit getProduit(){
         Produit produit= new Produit();
         try{
-
             produit.setLibelle(libelle.getText());
             produit.setPrix(new Double(prix.getText()));
         }catch (Exception e){

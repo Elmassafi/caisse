@@ -30,8 +30,10 @@ public class CategorieStatistics implements Initializable {
 
     private void drowlineChart(){
         XYChart.Series series = new XYChart.Series<>();
-        List<Double> ress = commandeService.commandeRevenuesByCategorie();
+
         List<Categorie> categories = commandeService.commandeCategorieByCategorie();
+        List<Double> ress = commandeService.commandeRevenuesForEachCategorie();
+
         for (int i = 0; i < ress.size(); i++) {
             Double myRes = ress.get(i);
             series.getData().add(new XYChart.Data(categories.get(i).toString(), myRes));

@@ -14,7 +14,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
 
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -48,16 +47,11 @@ public class StatisticsScreen implements Initializable {
     }
 
     public void drowLineChart() {
+        List<Object[]> objects = commandeService.findRevenuesByDateMinMax(dateMinGraph.getValue(), dateMaxGraph.getValue());
         XYChart.Series series = new XYChart.Series<>();
-        System.out.println("max is"+dateMaxGraph.getValue());
-        System.out.println("Min is "+dateMinGraph.getValue());
-        List<Double> ress = commandeService.commandeRevenues(dateMinGraph.getValue(), dateMaxGraph.getValue());
-        List<LocalDate> dates = commandeService.commandeRevenuesDate(dateMinGraph.getValue(), dateMaxGraph.getValue());
-        System.out.println(dates);
-        System.out.println(ress);
-        for (int i = 0; i < ress.size(); i++) {
-            Double myRes = ress.get(i);
-            series.getData().add(new XYChart.Data(dates.get(i).toString(), myRes));
+        for (Object[] object : objects) {
+            series.getData().add(new XYChart.Data(object[0].toString(), object[1]));
+            //    series.setData(objects);
         }
         lineChart.getData().setAll(series);
     }

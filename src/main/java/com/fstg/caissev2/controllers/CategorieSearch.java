@@ -45,11 +45,13 @@ public class CategorieSearch implements Initializable {
         initTableView();
     }
 
-    private void setCategorieComboBoxItems() {
+    public void setCategorieComboBoxItems() {
         categorieComboBox.getItems().setAll(new ArrayList());
         categorieComboBox.setValue("SELECT");
         List<String> items= categorieService.findAllCategoriesName();
         categorieComboBox.getItems().addAll(items);
+        stringComboBox.getItems().setAll(new ArrayList<>());
+        stringComboBox.getItems().addAll(categorieComboBox.getItems());
     }
 
     private void initTableView(){
@@ -114,7 +116,6 @@ public class CategorieSearch implements Initializable {
         grid.setPadding(new Insets(20, 150, 10, 10));
 
         stringComboBox.setValue(new String(produit.getCategorie().getLibelle()));
-        stringComboBox.getItems().addAll(categorieComboBox.getItems());
         libelle.setText(produit.getLibelle());
         prix.setText(produit.getPrix()+"");
 

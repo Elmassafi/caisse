@@ -20,6 +20,8 @@ public class CategorieScreen implements Initializable {
     @FXML
     private Label label;
 
+    private final CategorieSearch categorieSearch = new CategorieSearch();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -27,7 +29,7 @@ public class CategorieScreen implements Initializable {
 
     public void createCategorie(ActionEvent actionEvent) {
         if (cateName.getText().isEmpty()) {
-            showAlert("Merci de donnez Categorie nome");
+            showAlert("Merci de donnez nom de Categorie ");
         } else if (categorieService.isCommandeExist(cateName.getText())) {
             showAlert("Deja Exist");
         } else {
@@ -40,6 +42,7 @@ public class CategorieScreen implements Initializable {
         categorie = categorieService.saveCategorie(categorie);
         if (categorie != null) {
             showAlert("Ajouter Avec Succes");
+            categorieSearch.setCategorieComboBoxItems();
             cateName.setText("");
         }
     }
