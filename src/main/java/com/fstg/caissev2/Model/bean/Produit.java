@@ -23,6 +23,7 @@ public class Produit implements Serializable {
     private Long id;
     private String libelle;
     private Double prix;
+    private boolean active = true;
     @ManyToOne
     private Categorie categorie = new Categorie();
 
@@ -62,6 +63,14 @@ public class Produit implements Serializable {
 
     public void setPrix(Double prix) {
         this.prix = prix;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public Categorie getCategorie() {

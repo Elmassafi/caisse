@@ -1,4 +1,4 @@
-package com.fstg.caissev2.Model.dao;
+package com.fstg.caissev2.Model.service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -33,7 +33,7 @@ public class JPAUtility<T> {
 
     protected void update(T entity) {
         getEntityManager().getTransaction().begin();
-        getEntityManager().persist(entity);
+        getEntityManager().merge(entity);
         getEntityManager().getTransaction().commit();
     }
 
@@ -44,7 +44,7 @@ public class JPAUtility<T> {
     }
 
     public List<T> getMultipleResult(String query) {
-        List<T> list= getEntityManager().createQuery(query).getResultList();
+        List list = getEntityManager().createQuery(query).getResultList();
         if(list==null){
             return new ArrayList<>();
         }

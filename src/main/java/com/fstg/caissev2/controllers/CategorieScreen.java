@@ -1,7 +1,7 @@
 package com.fstg.caissev2.controllers;
 
 import com.fstg.caissev2.Model.bean.Categorie;
-import com.fstg.caissev2.Model.dao.CategorieService;
+import com.fstg.caissev2.Model.service.CategorieService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,7 +20,7 @@ public class CategorieScreen implements Initializable {
     @FXML
     private Label label;
 
-    private final CategorieSearch categorieSearch = new CategorieSearch();
+    private final ProduitSearch produitSearch = new ProduitSearch();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -42,7 +42,6 @@ public class CategorieScreen implements Initializable {
         categorie = categorieService.saveCategorie(categorie);
         if (categorie != null) {
             showAlert("Ajouter Avec Succes");
-            categorieSearch.setCategorieComboBoxItems();
             cateName.setText("");
         }
     }

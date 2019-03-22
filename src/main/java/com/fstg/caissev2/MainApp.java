@@ -1,7 +1,6 @@
 package com.fstg.caissev2;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -14,23 +13,7 @@ import java.io.IOException;
 
 public class MainApp extends Application {
 
-    public static void forward(ActionEvent actionEvent, String pageName, Class myClass) throws IOException {
-        Parent parent = FXMLLoader.load(myClass.getResource(pageName));
-        Scene scene = new Scene(parent);
-        Stage app_stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        app_stage.hide();
-        app_stage.setScene(scene);
-        app_stage.show();
-    }
 
-    public static void forward(Node node, String pageName, Class myClass) throws IOException {
-        Parent parent = FXMLLoader.load(myClass.getResource(pageName));
-        Scene scene = new Scene(parent);
-        Stage app_stage = (Stage) node.getScene().getWindow();
-        app_stage.hide();
-        app_stage.setScene(scene);
-        app_stage.show();
-    }
 
     /**
      * @param args the command line arguments
@@ -50,11 +33,13 @@ public class MainApp extends Application {
         stage.show();
     }
 
-    private void handle(ActionEvent e) {
-        try {
-            forward(e, "/fxml/SplashScreen.fxml", getClass());
-        } catch (IOException e1) {
-            System.out.println("errror");
-        }
+    public static void forward(Node node, String pageName, Class myClass) throws IOException {
+        Parent parent = FXMLLoader.load(myClass.getResource(pageName));
+        Scene scene = new Scene(parent);
+        Stage app_stage = (Stage) node.getScene().getWindow();
+        app_stage.hide();
+        app_stage.setScene(scene);
+        app_stage.show();
     }
+
 }

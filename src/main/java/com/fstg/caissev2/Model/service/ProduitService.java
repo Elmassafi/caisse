@@ -1,4 +1,4 @@
-package com.fstg.caissev2.Model.dao;
+package com.fstg.caissev2.Model.service;
 
 import com.fstg.caissev2.Model.bean.Categorie;
 import com.fstg.caissev2.Model.bean.Produit;
@@ -31,39 +31,44 @@ public class ProduitService extends JPAUtility<Produit> {
     public Produit findByLibelle(String libelle) {
         if (libelle != null && !libelle.isEmpty()) {
             String query = "SELECT p FROM Produit p WHERE p.libelle='" + libelle + "'";
-            return (Produit)  getSingleResult(query);
+            return getSingleResult(query);
         } else {
             return null;
         }
     }
-    public List<Produit> findAll(){
-        return getMultipleResult("SELECT p FROM Produit p");
+
+    public List<Produit> findAll() {
+        System.out.println("SELECT p FROM Produit p Where p.active=" + true + "'");
+        return getMultipleResult("SELECT p FROM Produit p Where p.active=" + true + "'");
     }
-    public List<Produit> findByCategorieLibelle(String libelle){
+
+    public List<Produit> findByCategorieLibelle(String libelle) {
         if (libelle != null && !libelle.isEmpty()) {
-            String query = "SELECT p FROM Produit p WHERE p.categorie.libelle='" + libelle + "'";
-            return getMultipleResult(query);
+            String query = "SELECT p FROM Produit p WHERE p.categorie.libelle='" + libelle + "' and p.active=" + true + "";
+            return getEntityManager().createQuery(query).getResultList();
         } else {
             return new ArrayList<>();
         }
     }
 
     public Produit updateProduit(Long id, String libelle, Double prixUpdate, String categorieName) {
-        Produit produit=findByLibelle(libelle);
-        if(produit==null){
-            produit= findById(id);
-            if(produit!=null){
-                produit.setLibelle(libelle);
-            }
+        Produit produit = findByLibelle(libelle);
+        if (produit == null) {
+            produit = findById(id);
+            if (produit != null) produit.setLibelle(libelle);
+            else return null;
         }
-        if(prixUpdate>0) produit.setPrix(prixUpdate);
-        if(!produit.getCategorie().getLibelle().equals(categorieName)){
-            Categorie categorie= categorieService.findByLibelle(categorieName);
-            produit.setCategorie(categorie);
+        if (prixUpdate != null && prixUpdate > 0) {
+            produit.setPrix(prixUpdate);
         }
-        save(produit);
+        if (!produit.getCategorie().getLibelle().equals(categorieName)) {
+            Categorie categorie = categorieService.findByLibelle(categorieName);
+            if (categorie != null) produit.setCategorie(categorie);
+        }
+        update(produit);
         return produit;
     }
+
 
     private Produit findById(Long id) {
         if (id != null) {
@@ -74,8 +79,20 @@ public class ProduitService extends JPAUtility<Produit> {
         }
     }
 
-    public void deleteProduit(Produit produit) {
-        // TODO
-        System.out.println("Not now");
+    public int deleteProduit(Produit produit) {
+        if (produit == null) {
+            return -1;
+        }
+        Produit p = findById(produit.getId());
+        if (p == null) {
+            p = findByLibelle(produit.getLibelle());
+            if (p == null) {
+                return -2;
+            }
+        }
+        p.setActive(false);
+        update(p);
+        return 1;
     }
+
 }

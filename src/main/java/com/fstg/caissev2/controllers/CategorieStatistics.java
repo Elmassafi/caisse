@@ -1,7 +1,7 @@
 package com.fstg.caissev2.controllers;
 
 import com.fstg.caissev2.Model.bean.Categorie;
-import com.fstg.caissev2.Model.dao.CommandeService;
+import com.fstg.caissev2.Model.service.CommandeService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.CategoryAxis;

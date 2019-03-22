@@ -1,7 +1,7 @@
 package com.fstg.caissev2.controllers;
 
 import com.fstg.caissev2.MainApp;
-import com.fstg.caissev2.Model.dao.CommandeService;
+import com.fstg.caissev2.Model.service.CommandeService;
 import com.fstg.caissev2.controllers.util.AlertShow;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -12,12 +12,11 @@ import javafx.scene.layout.VBox;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AdminScreen implements Initializable {
+public class HomeScreen implements Initializable {
 
     private final CommandeService commandeService = new CommandeService();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        commandeService.miseAjour();
     }
 
     public void onMouseEntered(MouseEvent mouseEvent) {
@@ -36,14 +35,6 @@ public class AdminScreen implements Initializable {
             vBox.setStyle("");
         }catch (Exception e){
             System.out.println("mouseEvent is Not VBox");
-        }
-    }
-
-    public static void goHome(ActionEvent actionEvent, Class myClass) {
-        try {
-            MainApp.forward(actionEvent, "/fxml/AdminScreen.fxml", myClass);
-        } catch (Exception e) {
-            AlertShow.showErrorAlert();
         }
     }
 
@@ -67,6 +58,14 @@ public class AdminScreen implements Initializable {
             MainApp.forward((Node) mouseEvent.getSource(), "/fxml/MenuScreen.fxml", getClass());
         } catch (Exception e) {
             System.out.println(e);
+        }
+    }
+
+    public static void goHome(ActionEvent actionEvent, Class myClass) {
+        try {
+            MainApp.forward((Node) actionEvent.getSource(), "/fxml/HomeScreen.fxml", myClass);
+        } catch (Exception e) {
+            AlertShow.showErrorAlert();
         }
     }
 

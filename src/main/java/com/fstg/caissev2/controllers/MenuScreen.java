@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
@@ -24,30 +23,20 @@ public class MenuScreen implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setSearchPaneChild(searchPane,"/fxml/CategorieSearch.fxml",getClass());
-        setSearchPaneChild(produitPane,"/fxml/ProduitAjouter.fxml",getClass());
-        addSearchPaneChild(produitPane,"/fxml/CategorieScreen.fxml",getClass());
-        setSearchPaneChild(statisticPane,"/fxml/CategorieStatistics.fxml",getClass());
+        addChildPane(searchPane, "/fxml/ProduitSearch.fxml", getClass());
+        addChildPane(produitPane, "/fxml/ProduitAjouter.fxml", getClass());
+        addChildPane(produitPane, "/fxml/CategorieScreen.fxml", getClass());
+        addChildPane(statisticPane, "/fxml/CategorieStatistics.fxml", getClass());
 
     }
 
     public void goHome(ActionEvent actionEvent) {
-        AdminScreen.goHome(actionEvent, getClass());
+        HomeScreen.goHome(actionEvent, getClass());
     }
 
-    public void setSearchPaneChild(Pane pane, String pageName, Class myClass){
+    private void addChildPane(Pane pane, String pageName, Class myClass) {
         try {
             Parent parent = FXMLLoader.load(myClass.getResource(pageName));
-            Scene scene = new Scene(parent);
-            pane.getChildren().setAll(parent);
-        }catch (Exception e){
-            pane.getChildren().addAll(new Label("Errorr Loading This Component"+e));
-        }
-    }
-    public void addSearchPaneChild(Pane pane, String pageName, Class myClass){
-        try {
-            Parent parent = FXMLLoader.load(myClass.getResource(pageName));
-            Scene scene = new Scene(parent);
             pane.getChildren().add(parent);
         }catch (Exception e){
             pane.getChildren().addAll(new Label("Errorr Loading This Component"+e));

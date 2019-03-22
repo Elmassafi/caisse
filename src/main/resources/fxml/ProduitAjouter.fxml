@@ -19,7 +19,8 @@
            GridPane.rowIndex="0">Produit :
     </Label>
     <Label prefHeight="17.0" prefWidth="70.0" GridPane.columnIndex="0" GridPane.rowIndex="1">Categorie:</Label>
-    <ComboBox fx:id="cateBox" prefHeight="25.0" prefWidth="148.0" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    <ComboBox fx:id="cateBox" prefHeight="25.0" prefWidth="148.0" onMouseClicked="#initComboBox"
+              GridPane.columnIndex="1" GridPane.rowIndex="1"/>
     <Label GridPane.columnIndex="0" GridPane.rowIndex="2">Libelle:</Label>
     <TextField fx:id="libelle" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
     <Label GridPane.columnIndex="0" GridPane.rowIndex="3">prix:</Label>

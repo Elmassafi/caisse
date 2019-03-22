@@ -2,7 +2,6 @@ package com.fstg.caissev2.controllers.util;
 
 
 
-import com.fstg.caissev2.Model.bean.Categorie;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
@@ -15,27 +14,28 @@ import java.util.List;
 
 public class TableViewProvider<T> {
 
-    protected List<String> tableViewItems= new ArrayList();
-    protected List<T> list = new ArrayList<T>();
+    protected List<String> tableViewTitles = new ArrayList();
+
+    protected List<T> tableViewObjects = new ArrayList<>();
+
     protected TableView<T> table;
 
-    private ObservableList<T> data = FXCollections.observableArrayList(list);
+    private ObservableList<T> data = FXCollections.observableArrayList(tableViewObjects);
 
     public TableViewProvider(TableView<T> table,List<String> attributesNames) {
-        this.tableViewItems.addAll(attributesNames);
+        this.tableViewTitles.addAll(attributesNames);
         this.table = table;
         fillTable();
     }
     public TableViewProvider(TableView<T> table,String... values) {
-        this.tableViewItems.addAll(Arrays.asList(values));
+        this.tableViewTitles.addAll(Arrays.asList(values));
         this.table = table;
-        this.list = list;
         fillTable();
     }
     public TableViewProvider(TableView<T> table, List<T> list,String... values) {
-        this.tableViewItems.addAll(Arrays.asList(values));
+        this.tableViewTitles.addAll(Arrays.asList(values));
         this.table = table;
-        this.list = list;
+        this.tableViewObjects = list;
         fillTable();
     }
 
@@ -44,34 +44,34 @@ public class TableViewProvider<T> {
     }
 
     private void fillTable(){
-        for (int i = 0; i < tableViewItems.size(); i++) {
-            TableColumn<T, ?> column = new TableColumn<>(tableViewItems.get(i));
-            column.setCellValueFactory(new PropertyValueFactory<>(tableViewItems.get(i)));
+        for (String tableViewTitle : tableViewTitles) {
+            TableColumn<T, ?> column = new TableColumn<>(tableViewTitle);
+            column.setCellValueFactory(new PropertyValueFactory<>(tableViewTitle));
             table.getColumns().add(column);
         }
-        data = FXCollections.observableArrayList(list);
+        data = FXCollections.observableArrayList(tableViewObjects);
         table.setItems(data);
     }
 
     public List<T> getList() {
-        return list;
+        return tableViewObjects;
+    }
+
+    public void setList(List<T> list) {
+        this.tableViewObjects = list;
+        data = FXCollections.observableArrayList(list);
+        table.setItems(data);
     }
 
     public void addItem(T t){
-        list.add(t);
-        data = FXCollections.observableArrayList(list);
-        table.setItems(data);
-    }
-    
-    public void remove(T t){
-        list.remove(t);
-        data = FXCollections.observableArrayList(list);
+        tableViewObjects.add(t);
+        data = FXCollections.observableArrayList(tableViewObjects);
         table.setItems(data);
     }
 
-    public void setList(List<T> list){
-        this.list=list;
-        data = FXCollections.observableArrayList(list);
+    public void remove(T t){
+        tableViewObjects.remove(t);
+        data = FXCollections.observableArrayList(tableViewObjects);
         table.setItems(data);
     }
 

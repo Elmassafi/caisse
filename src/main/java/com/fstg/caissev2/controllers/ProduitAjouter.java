@@ -1,8 +1,8 @@
 package com.fstg.caissev2.controllers;
 
 import com.fstg.caissev2.Model.bean.Produit;
-import com.fstg.caissev2.Model.dao.CategorieService;
-import com.fstg.caissev2.Model.dao.ProduitService;
+import com.fstg.caissev2.Model.service.CategorieService;
+import com.fstg.caissev2.Model.service.ProduitService;
 import com.fstg.caissev2.controllers.util.AlertShow;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,12 +16,13 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ProduitAjouter implements Initializable {
+
     @FXML
-    public ComboBox cateBox;
+    private ComboBox cateBox;
     @FXML
-    public TextField libelle;
+    private TextField libelle;
     @FXML
-    public TextField prix;
+    private TextField prix;
 
     private final CategorieService categorieService= new CategorieService();
 
@@ -32,6 +33,7 @@ public class ProduitAjouter implements Initializable {
         initComboBox();
     }
 
+    @FXML
     private void initComboBox() {
         cateBox.getItems().setAll(new ArrayList());
         cateBox.setValue("SELECT");

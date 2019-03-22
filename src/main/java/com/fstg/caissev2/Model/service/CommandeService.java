@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.fstg.caissev2.Model.dao;
+package com.fstg.caissev2.Model.service;
 
 import com.fstg.caissev2.Model.bean.Categorie;
 import com.fstg.caissev2.Model.bean.Commande;
@@ -116,20 +116,7 @@ public class CommandeService extends JPAUtility {
         return getMultipleResult(query);
     }
 
-    //MiseAjour Methode
-    public void miseAjour() {
-        List<Commande> commandes = findAll();
-        commandes.forEach(c -> miseAjour(c));
-    }
-
-    private void miseAjour(Commande commande) {
-        List<CommandeItem> commandeItems = findCommandeItemsByCommande(commande.getId());
-        double total = 0D;
-        total = commandeItems.stream().mapToDouble(c -> c.getTotal()).sum();
-        commande.setTotal(total);
-        save(commande);
-    }
-/*
+ /*
     public List<Double> commandeRevenues(LocalDate dateMin, LocalDate dateMax) {
         String query = "SELECT SUM(c.total) FROM Commande c where 1=1 ";
         if (dateMin != null) {

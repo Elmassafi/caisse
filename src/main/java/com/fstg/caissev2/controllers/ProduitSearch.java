@@ -1,8 +1,8 @@
 package com.fstg.caissev2.controllers;
 
 import com.fstg.caissev2.Model.bean.Produit;
-import com.fstg.caissev2.Model.dao.CategorieService;
-import com.fstg.caissev2.Model.dao.ProduitService;
+import com.fstg.caissev2.Model.service.CategorieService;
+import com.fstg.caissev2.Model.service.ProduitService;
 import com.fstg.caissev2.controllers.util.TableViewProvider;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class CategorieSearch implements Initializable {
+public class ProduitSearch implements Initializable {
 
     @FXML
     public ComboBox categorieComboBox;
@@ -33,7 +33,7 @@ public class CategorieSearch implements Initializable {
     private final ProduitService produitService= new ProduitService();
 
     // Upadate or delete Produit Vraibles
-    private ComboBox<String> stringComboBox= new ComboBox<>();
+    private ComboBox<String> categorieAlertComboBox = new ComboBox<>();
     private TextField libelle = new TextField();
     private TextField prix = new TextField();
 
@@ -41,17 +41,17 @@ public class CategorieSearch implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setCategorieComboBoxItems();
+        initCategorieComboBoxItems();
         initTableView();
     }
 
-    public void setCategorieComboBoxItems() {
+    public void initCategorieComboBoxItems() {
         categorieComboBox.getItems().setAll(new ArrayList());
         categorieComboBox.setValue("SELECT");
         List<String> items= categorieService.findAllCategoriesName();
         categorieComboBox.getItems().addAll(items);
-        stringComboBox.getItems().setAll(new ArrayList<>());
-        stringComboBox.getItems().addAll(categorieComboBox.getItems());
+        categorieAlertComboBox.getItems().setAll(new ArrayList<>());
+        categorieAlertComboBox.getItems().addAll(categorieComboBox.getItems());
     }
 
     private void initTableView(){
@@ -90,7 +90,7 @@ public class CategorieSearch implements Initializable {
         setAlertContent(alert,produit);
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == buttonTypeOne){
-         updateProduit(produit);
+            updateProduit(produit);
         } else if (result.get() == buttonTypeTwo) {
                       produitService.deleteProduit(produit);
         } else{
@@ -102,7 +102,7 @@ public class CategorieSearch implements Initializable {
     private void updateProduit(Produit produit) {
         try{
             Double prixUpdate= new Double(prix.getText());
-            produit=produitService.updateProduit(produit.getId(),libelle.getText(),prixUpdate,stringComboBox.getValue());
+            produit = produitService.updateProduit(produit.getId(), libelle.getText(), prixUpdate, categorieAlertComboBox.getValue());
             produitTableViewProvider.setList(new ArrayList<>());
         }catch (Exception e){
             System.out.println(e);
@@ -115,12 +115,12 @@ public class CategorieSearch implements Initializable {
         grid.setVgap(10);
         grid.setPadding(new Insets(20, 150, 10, 10));
 
-        stringComboBox.setValue(new String(produit.getCategorie().getLibelle()));
+        categorieAlertComboBox.setValue(new String(produit.getCategorie().getLibelle()));
         libelle.setText(produit.getLibelle());
         prix.setText(produit.getPrix()+"");
 
         grid.add(new Label("Categorie:"), 0, 0);
-        grid.add(stringComboBox,1,0);
+        grid.add(categorieAlertComboBox, 1, 0);
         grid.add(new Label("Produit:"), 0, 1);
         grid.add(libelle, 1, 1);
         grid.add(new Label("Prix:"), 0, 2);

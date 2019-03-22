@@ -1,4 +1,4 @@
-package com.fstg.caissev2.Model.dao;
+package com.fstg.caissev2.Model.service;
 
 import com.fstg.caissev2.Model.bean.Categorie;
 
