@@ -16,11 +16,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="caisse-v2" />
+        <module name="caisse" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="caisse-v2" target="8" />
+      <module name="caisse" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -28,19 +28,19 @@ USE `caisse`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categorie`
+-- Table structure for table `category`
 --
 
-CREATE TABLE `categorie` (
+CREATE TABLE `category` (
   `ID` bigint(20) NOT NULL,
   `LIBELLE` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `categorie`
+-- Dumping data for table `category`
 --
 
-INSERT INTO `categorie` (`ID`, `LIBELLE`) VALUES
+INSERT INTO `category` (`ID`, `LIBELLE`) VALUES
 (2, 'sandwishes'),
 (3, 'drinks'),
 (651, 'gateaux'),
@@ -49,10 +49,10 @@ INSERT INTO `categorie` (`ID`, `LIBELLE`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `produit`
+-- Table structure for table `product`
 --
 
-CREATE TABLE `produit` (
+CREATE TABLE `product` (
   `ID` bigint(20) NOT NULL,
   `ACTIVE` tinyint(1) DEFAULT '0',
   `LIBELLE` varchar(255) DEFAULT NULL,
@@ -61,10 +61,10 @@ CREATE TABLE `produit` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `produit`
+-- Dumping data for table `product`
 --
 
-INSERT INTO `produit` (`ID`, `ACTIVE`, `LIBELLE`, `PRIX`, `CATEGORIE_ID`) VALUES
+INSERT INTO `product` (`ID`, `ACTIVE`, `LIBELLE`, `PRIX`, `CATEGORIE_ID`) VALUES
 (51, 1, 'Cafe Latte', 20, 3),
 (52, 1, 'Americano', 23, 3),
 (53, 1, 'Hot Cocolate', 30, 3),
@@ -82,10 +82,10 @@ INSERT INTO `produit` (`ID`, `ACTIVE`, `LIBELLE`, `PRIX`, `CATEGORIE_ID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `commande`
+-- Table structure for table `order`
 --
 
-CREATE TABLE `commande` (
+CREATE TABLE `order` (
   `ID` bigint(20) NOT NULL,
   `DATE` longblob,
   `TIME` longblob,
@@ -93,10 +93,10 @@ CREATE TABLE `commande` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `commande`
+-- Dumping data for table `order`
 --
 
-INSERT INTO `commande` (`ID`, `DATE`, `TIME`, `TOTAL`) VALUES
+INSERT INTO `order` (`ID`, `DATE`, `TIME`, `TOTAL`) VALUES
 (5, 0xaced00057372000d6a6176612e74696d652e536572955d84ba1b2248b20c00007870770703000007e3031578, 0xaced00057372000d6a6176612e74696d652e536572955d84ba1b2248b20c000078707708040d1336310dfbc078, 170),
 (101, 0xaced00057372000d6a6176612e74696d652e536572955d84ba1b2248b20c00007870770703000007e3031178, 0xaced00057372000d6a6176612e74696d652e536572955d84ba1b2248b20c00007870770804172b2110ed7f0078, 3270),
 (151, 0xaced00057372000d6a6176612e74696d652e536572955d84ba1b2248b20c00007870770703000007e3030478, 0xaced00057372000d6a6176612e74696d652e536572955d84ba1b2248b20c000078707708040a2d040baeb90078, 2025),
@@ -265,15 +265,15 @@ INSERT INTO `sequence` (`SEQ_NAME`, `SEQ_COUNT`) VALUES
 --
 
 --
--- Indexes for table `categorie`
+-- Indexes for table `category`
 --
-ALTER TABLE `categorie`
+ALTER TABLE `category`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `commande`
+-- Indexes for table `order`
 --
-ALTER TABLE `commande`
+ALTER TABLE `order`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -285,9 +285,9 @@ ALTER TABLE `commandeitem`
   ADD KEY `FK_COMMANDEITEM_COMMANDE_ID` (`COMMANDE_ID`);
 
 --
--- Indexes for table `produit`
+-- Indexes for table `product`
 --
-ALTER TABLE `produit`
+ALTER TABLE `product`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `FK_PRODUIT_CATEGORIE_ID` (`CATEGORIE_ID`);
 
@@ -305,14 +305,14 @@ ALTER TABLE `sequence`
 -- Constraints for table `commandeitem`
 --
 ALTER TABLE `commandeitem`
-  ADD CONSTRAINT `FK_COMMANDEITEM_COMMANDE_ID` FOREIGN KEY (`COMMANDE_ID`) REFERENCES `commande` (`ID`),
-  ADD CONSTRAINT `FK_COMMANDEITEM_PRODUIT_ID` FOREIGN KEY (`PRODUIT_ID`) REFERENCES `produit` (`ID`);
+  ADD CONSTRAINT `FK_COMMANDEITEM_COMMANDE_ID` FOREIGN KEY (`COMMANDE_ID`) REFERENCES `order` (`ID`),
+  ADD CONSTRAINT `FK_COMMANDEITEM_PRODUIT_ID` FOREIGN KEY (`PRODUIT_ID`) REFERENCES `product` (`ID`);
 
 --
--- Constraints for table `produit`
+-- Constraints for table `product`
 --
-ALTER TABLE `produit`
-  ADD CONSTRAINT `FK_PRODUIT_CATEGORIE_ID` FOREIGN KEY (`CATEGORIE_ID`) REFERENCES `categorie` (`ID`);
+ALTER TABLE `product`
+  ADD CONSTRAINT `FK_PRODUIT_CATEGORIE_ID` FOREIGN KEY (`CATEGORIE_ID`) REFERENCES `category` (`ID`);
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 

@@ -1,90 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.LineChart?>
-<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<HBox xmlns:fx="http://javafx.com/fxml/1" prefHeight="452.0" prefWidth="934.0" xmlns="http://javafx.com/javafx/8.0.121"
-      fx:controller="com.fstg.caissev2.controllers.StatisticsScreen">
-    <children>
-        <VBox>
-            <GridPane hgap="10" vgap="10">
-                <Label GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="0">Chercher les commandes
-                    comprises centre deux date:
-                </Label>
-                <Label GridPane.columnIndex="1" GridPane.rowIndex="1">DateMin</Label>
-                <DatePicker fx:id="dateMin" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-                <Label GridPane.columnIndex="3" GridPane.rowIndex="1">DateMax</Label>
-                <DatePicker fx:id="dateMax" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
-                <Button onAction="#commandsByDate" prefHeight="25.0" prefWidth="175.0" text="Search"
-                        GridPane.columnIndex="3" GridPane.rowIndex="3">Search
-                </Button>
+
+<HBox alignment="CENTER" prefHeight="452.0" prefWidth="934.0" xmlns="http://javafx.com/javafx/8.0.121"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fstg.caisse.controllers.StatisticsScreen">
+    <VBox prefHeight="452.0" prefWidth="400.0">
+        <GridPane hgap="10" vgap="10">
+            <Label GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="0">Chercher les commandes
+                comprises centre deux date:
+            </Label>
+            <Label GridPane.columnIndex="1" GridPane.rowIndex="1">DateMin</Label>
+            <DatePicker fx:id="dateMin" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+            <Label GridPane.columnIndex="3" GridPane.rowIndex="1">DateMax</Label>
+            <DatePicker fx:id="dateMax" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+            <Button onAction="#commandsByDate" prefHeight="25.0" prefWidth="175.0" text="Search"
+                    GridPane.columnIndex="3" GridPane.rowIndex="3">Search
+            </Button>
+        <columnConstraints>
+            <ColumnConstraints/>
+            <ColumnConstraints/>
+            <ColumnConstraints/>
+            <ColumnConstraints/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints/>
+            <RowConstraints/>
+            <RowConstraints/>
+            <RowConstraints/>
+        </rowConstraints>
+            <padding>
+                <Insets bottom="10.0"/>
+            </padding>
+        </GridPane>
+        <TableView fx:id="tableView" prefHeight="298.0" prefWidth="400.0">
+        <columns>
+            <TableColumn prefWidth="150" fx:id="orderDateColumn" text="Date"/>
+            <TableColumn prefWidth="100" fx:id="orderTimeColumn" text="Time"/>
+            <TableColumn prefWidth="150" fx:id="orderTotalColumn" text="Total"/>
+        </columns>
+        </TableView>
+        <padding>
+            <Insets left="10.0" top="10.0"/>
+        </padding>
+    </VBox>
+    <VBox prefHeight="452.0" prefWidth="561.0">
+        <TilePane alignment="CENTER">
+            <Label>Les bénéfices par jour :</Label>
+        </TilePane>
+        <LineChart fx:id="lineChart" prefHeight="300.0" prefWidth="450.0">
+            <xAxis>
+                <CategoryAxis side="BOTTOM" fx:id="x"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis fx:id="y" side="LEFT"/>
+            </yAxis>
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+            </padding>
+        </LineChart>
+        <GridPane hgap="10" vgap="10">
+            <Label prefHeight="17.0" prefWidth="142.0" GridPane.columnIndex="1">DateMin</Label>
+            <DatePicker fx:id="dateMinGraph" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+            <Label prefHeight="17.0" prefWidth="139.0" GridPane.columnIndex="3">DateMax</Label>
+            <DatePicker fx:id="dateMaxGraph" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+            <Button onAction="#drawLineChart" prefHeight="25.0" prefWidth="175.0" text="Search" GridPane.columnIndex="4"
+                    GridPane.rowIndex="1">Search
+            </Button>
             <columnConstraints>
-               <ColumnConstraints />
-               <ColumnConstraints />
-               <ColumnConstraints />
-               <ColumnConstraints />
+                <ColumnConstraints/>
+                <ColumnConstraints/>
+                <ColumnConstraints/>
+                <ColumnConstraints/>
+                <ColumnConstraints/>
             </columnConstraints>
             <rowConstraints>
-               <RowConstraints />
-               <RowConstraints />
-               <RowConstraints />
+                <RowConstraints/>
+                <RowConstraints/>
                 <RowConstraints/>
             </rowConstraints>
-                <padding>
-                    <Insets bottom="10.0" />
-                </padding>
-            </GridPane>
-            <TableView fx:id="tableView" prefHeight="300.0" prefWidth="450.0">
-            </TableView>
-            <padding>
-                 <Insets left="10.0" top="10.0" />
-             </padding>
-        </VBox>
-        <VBox>
-            <TilePane alignment="CENTER">
-                <Label>Les bénéfices par jour :</Label>
-            </TilePane>
-         <LineChart fx:id="lineChart" prefHeight="300.0" prefWidth="450.0">
-           <xAxis>
-               <CategoryAxis side="BOTTOM" fx:id="x"/>
-           </xAxis>
-           <yAxis>
-               <NumberAxis fx:id="y" side="LEFT"/>
-           </yAxis>
-             <padding>
-                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-             </padding>
-         </LineChart>
-            <GridPane hgap="10" vgap="10">
-                <Label prefHeight="17.0" prefWidth="142.0" GridPane.columnIndex="1">DateMin</Label>
-                <DatePicker fx:id="dateMinGraph" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <Label prefHeight="17.0" prefWidth="139.0" GridPane.columnIndex="3">DateMax</Label>
-                <DatePicker fx:id="dateMaxGraph" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                <Button onAction="#drowLineChart" prefHeight="25.0" prefWidth="175.0" text="Search"
-                        GridPane.columnIndex="4" GridPane.rowIndex="1">Search
-                </Button>
-                <columnConstraints>
-                    <ColumnConstraints />
-                    <ColumnConstraints />
-                    <ColumnConstraints />
-                    <ColumnConstraints />
-               <ColumnConstraints />
-                </columnConstraints>
-                <rowConstraints>
-                    <RowConstraints />
-                    <RowConstraints />
-                    <RowConstraints />
-                </rowConstraints>
-            </GridPane>
-            <HBox alignment="TOP_RIGHT">
-                <Button onAction="#goHome" prefHeight="36.0" prefWidth="68.0">Home</Button>
-            </HBox>
-            <padding>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-            </padding>
-        </VBox>
-    </children>
+        </GridPane>
+        <HBox alignment="TOP_RIGHT">
+            <Button onAction="#goHome" prefHeight="36.0" prefWidth="68.0">Home</Button>
+        </HBox>
+        <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+        </padding>
+    </VBox>
 </HBox>

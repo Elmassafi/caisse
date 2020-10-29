@@ -5,13 +5,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 <VBox xmlns:fx="http://javafx.com/fxml/1" fx:id="vbox" prefHeight="222.0" prefWidth="343.0"
-      xmlns="http://javafx.com/javafx/8.0.121" fx:controller="com.fstg.caissev2.controllers.SplashScreen">
-    <children>
-        <ImageView fx:id="image" fitHeight="311.0" fitWidth="463.0" layoutX="-150.0">
-            <image>
-                <Image url="@../assets/img/splashScreen.jpg"/>
-            </image>
-        </ImageView>
-        <ProgressBar fx:id="progress" prefHeight="18.0" prefWidth="464.0"/>
-    </children>
+      xmlns="http://javafx.com/javafx/8.0.121" fx:controller="com.fstg.caisse.controllers.SplashScreen">
+    <ImageView fx:id="image" fitHeight="311.0" fitWidth="463.0" layoutX="-150.0">
+        <Image url="@../assets/img/splashScreen.jpg"/>
+    </ImageView>
+    <ProgressBar fx:id="progress" prefHeight="18.0" prefWidth="464.0"/>
 </VBox>

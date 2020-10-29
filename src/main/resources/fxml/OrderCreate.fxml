@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox prefHeight="497.0" prefWidth="386.0" style="-fx-font-family:'Arial Narrow'"
+      xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.fstg.caisse.controllers.OrderCreate">
+    <GridPane alignment="CENTER" hgap="10" prefHeight="62.0" prefWidth="334.0" vgap="10">
+        <Label GridPane.columnIndex="1" GridPane.rowIndex="1">Categorie:</Label>
+        <ComboBox fx:id="categoriesComboBox" layoutX="49.0" layoutY="28.0" prefHeight="25.0" prefWidth="144.0"
+                  GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+        <Button fx:id="search" onAction="#searchProduct" prefHeight="25.0" prefWidth="64.0" GridPane.columnIndex="3"
+                GridPane.rowIndex="1">Search
+        </Button>
+        <columnConstraints>
+            <ColumnConstraints/>
+            <ColumnConstraints/>
+            <ColumnConstraints/>
+            <ColumnConstraints/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints/>
+            <RowConstraints/>
+        </rowConstraints>
+    </GridPane>
+    <TableView fx:id="productTableView" maxHeight="2" maxWidth="2" minHeight="-Infinity" minWidth="-Infinity"
+               onMouseClicked="#showAlert" prefHeight="175.0" prefWidth="381.0">
+        <VBox.margin>
+            <Insets topRightBottomLeft="5.0"/>
+        </VBox.margin>
+        <columns>
+            <TableColumn fx:id="productLibelleColumn" prefWidth="152" text="Libelle"/>
+            <TableColumn fx:id="productPrixColumn" prefWidth="77" text="Prix"/>
+            <TableColumn fx:id="productCategorieColumn" prefWidth="152" text="Categorie"/>
+        </columns>
+    </TableView>
+    <GridPane alignment="CENTER" hgap="10" prefHeight="23.0" prefWidth="351.0" vgap="10">
+        <Label GridPane.columnIndex="1" GridPane.rowIndex="0">Qte:</Label>
+        <TextField fx:id="qte" layoutX="49.0" layoutY="28.0" prefHeight="25.0" prefWidth="174.0"
+                   GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+        <Button fx:id="ajouter" onAction="#addCommandItem" prefHeight="25.0" prefWidth="64.0" GridPane.columnIndex="3"
+                GridPane.rowIndex="0">Ajouter
+        </Button>
+        <columnConstraints>
+            <ColumnConstraints/>
+            <ColumnConstraints/>
+            <ColumnConstraints/>
+            <ColumnConstraints/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints/>
+        </rowConstraints>
+    </GridPane>
+    <TableView fx:id="commandItemTableView" maxHeight="2" maxWidth="2" minHeight="-Infinity" minWidth="-Infinity"
+               onMouseClicked="#showAlert" prefHeight="190.0" prefWidth="381.0">
+        <VBox.margin>
+            <Insets topRightBottomLeft="5.0"/>
+        </VBox.margin>
+        <columns>
+            <TableColumn fx:id="productCommandItem" prefWidth="150.0" text="Product"/>
+            <TableColumn fx:id="priceCommandItem" prefWidth="77.0" text="Price"/>
+            <TableColumn fx:id="qteCommandItem" prefWidth="77.0" text="Qte"/>
+            <TableColumn fx:id="totalCommandItem" prefWidth="77.0" text="Total"/>
+        </columns>
+    </TableView>
+    <TilePane alignment="CENTER" prefHeight="51.0" prefWidth="358.0">
+        <Button fx:id="saveCommande" onAction="#validCommand" prefHeight="26.0" prefWidth="135.0"
+                GridPane.columnIndex="2" GridPane.rowIndex="0">Valide Commande
+        </Button>
+        <Button onAction="#goHome">Home</Button>
+    </TilePane>
+</VBox>
